@@ -31,7 +31,7 @@ const ListItem = ({ menu }) => {
             >
               <Link
                 className="flex items-center ml-2 text-sm tracking-wide truncate"
-                href={e.route}
+                href={`/${e.route}`}
               >
                 {e.name}
               </Link>

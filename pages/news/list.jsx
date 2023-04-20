@@ -59,7 +59,13 @@ const List = () => {
 
   return (
     <MainLayout>
-      <CreateTable actions={actions} columns={columns} data={data} />
+      <div className="container mx-auto p-9">
+        <h5 className="mb-1 text-2xl">Haberleri Listele</h5>
+        <p className="mb-5 text-slate-500">
+          Haberlerinizi bu alandan görüntüleyebilirsiniz...
+        </p>
+        <CreateTable actions={actions} columns={columns} data={data} />
+      </div>
     </MainLayout>
   );
 };
