@@ -1,5 +1,6 @@
 import React from "react";
 import MainLayout from "../../src/components/MainLayout";
+import NewsForm from "../../src/components/forms/news-form";
 
 const Create = () => {
   return (
@@ -9,6 +10,7 @@ const Create = () => {
         <p className="mb-5 text-slate-500">
           Haberi bu alandan oluşturabilirsiniz...
         </p>
+        <NewsForm />
       </div>
     </MainLayout>
   );

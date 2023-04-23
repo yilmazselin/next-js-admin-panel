@@ -1,22 +1,21 @@
 import { Button } from "flowbite-react";
 import React, { useState } from "react";
 import ConfirmModal from "../modals/ConfirmModal";
+import EditModal from "../modals/EditModal";
 
 const ActionButtons = ({ actions, data }) => {
-  const [modalVisible, setmodalVisible] = useState(0);
+  const [modalVisible, setmodalVisible] = useState(false);
 
   const handleClickAction = (action) => {
-    const actionIndex = actions.indIndex((e) => e.name === action.name);
-    setmodalVisible(actionIndex);
+    setmodalVisible(action.name);
   };
 
   return (
     <>
       <div className="flex">
         {actions.map((action, i) => (
-          <div className="mx-2">
+          <div className="mx-2" key={i}>
             <Button
-              key={i}
               size={action.size}
               color={action.color}
               onClick={() => handleClickAction(action)}
@@ -26,11 +25,20 @@ const ActionButtons = ({ actions, data }) => {
           </div>
         ))}
       </div>
-      <ConfirmModal
-        isVisible={modalVisible === false ? false : true}
-        setConfirmModalVisible={setmodalVisible}
-        onConfirm={actions[modalVisible]?.click}
-      />
+      {modalVisible === "Edit" && (
+        <EditModal
+          isVisible={true}
+          setModalVisible={setmodalVisible}
+          onConfirm={actions.find((action) => action.name === "Edit").click}
+        />
+      )}
+      {modalVisible === "Delete" && (
+        <ConfirmModal
+          isVisible={true}
+          setModalVisible={setmodalVisible}
+          onConfirm={actions.find((action) => action.name === "Delete").click}
+        />
+      )}
     </>
   );
 };

@@ -39,7 +39,8 @@ const List = () => {
       size: "xs",
       type: "modal",
       click: (d) => {
-        alert(d);
+        console.log("d", d);
+        alert("Edit");
       },
     },
     {
