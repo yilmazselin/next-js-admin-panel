@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/router";
 import Input from "./Input";
 import { Button } from "flowbite-react";
 
 const NewsForm = () => {
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -21,8 +23,25 @@ const NewsForm = () => {
       category: Yup.string().required("Bu alan zorunludur"),
       tags: Yup.string().required("Bu alan zorunludur"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const requestBody = {
+          title: values.title,
+          content: values.content,
+          author: values.author,
+          category: values.category,
+          tags: values.tags,
+        };
+        const request = await fetch("/api/news/create", {
+          body: JSON.stringify(requestBody),
+          method: "POST",
+        });
+        if (request.status === 200) {
+          router.push("/news/list");
+        }
+      } catch (error) {
+        console.log("CATCH", error);
+      }
     },
   });
   return (
